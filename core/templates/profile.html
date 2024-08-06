@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block profile %}
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-5" width="150px" src="{{ profile.image.url }}">
+                <span class="font-weight-bold">{{ user.username }}</span>
+                <span class="text-black-50">{{ user.email }}</span>
+            </div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">ตั้งค่าข้อมูลส่วนตัว</h4>
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <label class="labels">ชื่อ</label>
+                            <input type="text" class="form-control" value="{{ user.first_name }}" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">นามสกุล</label>
+                            <input type="text" class="form-control" value="{{ user.last_name }}" readonly>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label class="labels">เบอร์โทร</label>
+                            {{ address_form.phone_number }}
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">ที่อยู่</label>
+                            {{ address_form.address_line }}
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">จังหวัด</label>
+                            {{ address_form.province }}
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">อำเภอ</label>
+                            {{ address_form.district }}
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">รหัสไปรษณีย์</label>
+                            {{ address_form.postal_code }}
+                        </div>
+                    </div>
+                    <div class="mt-5 text-center">
+                        <button class="btn btn-primary profile-button" type="submit">บันทึกโปรไฟล์</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock profile %}

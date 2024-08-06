@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block slip_approve %}
+<div class="container mt-5">
+    <h2>รายการสลิปที่อัปโหลด</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ลำดับ</th>
+                <th>รูปสลิป</th>
+                <th>จำนวนเงิน</th>
+                <th>สถานะ</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for slip in slips %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>
+                        <img src="{{ slip.slip_image.url }}" alt="Slip Image" style="width: 100px; height: auto;">
+                    </td>
+                    <td>{{ slip.cost }}</td>
+                    <td>
+                        {% if slip.approve %}
+                            <span class="badge bg-success">อนุมัติแล้ว</span>
+                        {% else %}
+                            <span class="badge bg-warning">รอการอนุมัติ</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock slip_approve %}
