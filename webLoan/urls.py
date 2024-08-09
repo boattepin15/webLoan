@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from core.views import home, register, profile,upload_slip, slip_approve, checkin
+from core.views import home, register, profile,upload_slip, slip_approve, checkin, save_location
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -15,7 +15,9 @@ urlpatterns = [
     path('auth/profile/', view=profile, name="profile"),
     path('upload_slip/', upload_slip, name='upload_slip'),
     path('slip_approve/', slip_approve, name='slip_approve'),
-    path('checkin/', checkin, name='checkin')
+    path('checkin/', checkin, name='checkin'),
+
+    path('save_location/', save_location, name='save_location'),
 ]
 
 if settings.DEBUG:

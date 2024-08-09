@@ -43,7 +43,7 @@
           </a>
 
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="{% url 'home' %}" class="nav-link px-2 link-dark">หน้าหลัก</a></li>
+            <li><a href="{% url 'profile' %}" class="nav-link px-2 link-dark">หน้าหลัก</a></li>
             <li><a href="{% url 'checkin' %}" class="nav-link px-2 link-dark">รับเครดิตฟรี</a></li>
             <li><a href="{% url 'upload_slip' %}" class="nav-link px-2 link-dark">ส่งหลักฐานการโอนเงิน</a></li>
             <li><a href="{% url 'slip_approve' %}" class="nav-link px-2 link-dark">ตรวจสอบการโอน</a></li>
@@ -51,11 +51,14 @@
 
           <div class="col-md-3 text-end">
             <a href="{% url 'login' %}" class="btn btn-outline-primary me-2">เข้าสู่ระบบ</a>
-            <a href="{% url 'register' %}" class="btn btn-primary">สมัครสมาชิก</a>
+            {% comment %} <a href="{% url 'register' %}" class="btn btn-primary">สมัครสมาชิก</a> {% endcomment %}
           </div>
         </header>
       </div>
     </main>
+    <div class="container mt-5">
+      <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    </div>
     {% endblock header %}
     
     {% block homepage %}
@@ -76,8 +79,9 @@
     {% block checin %}
     {% endblock checin %}
 
+ 
 
-
+    <script src="{% static 'js/geolocation.js' %}"></script>
     <script src="{% static 'assets/dist/js/bootstrap.bundle.min.js' %}"></script>
   </body>
 </html>

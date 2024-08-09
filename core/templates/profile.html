@@ -5,9 +5,12 @@
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="150px" src="{{ profile.image.url }}">
+                <img class="border border-dark" width="150px" src="{{ profile.image.url }}">
                 <span class="font-weight-bold">{{ user.username }}</span>
                 <span class="text-black-50">{{ user.email }}</span>
+                <div class="col-md-12">
+                    <label class="labels">คะแนนเครดิตที่มี {{ profile.score }}</label>
+                </div>
             </div>
         </div>
         <div class="col-md-5 border-right">
@@ -48,11 +51,13 @@
                             <label class="labels">รหัสไปรษณีย์</label>
                             {{ address_form.postal_code }}
                         </div>
+
                     </div>
                     <div class="mt-5 text-center">
                         <button class="btn btn-primary profile-button" type="submit">บันทึกโปรไฟล์</button>
                     </div>
                 </form>
+                
             </div>
         </div>
     </div>

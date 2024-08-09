@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import  HttpResponse
 # from core.models import Profile
 from core.forms import auth as auth_form
 #from django.shortcuts import get_object_or_404
@@ -7,7 +8,7 @@ from core.forms.address import AddressForm
 from core.forms.profile import ProfileForm
 from core.forms.checkin import CheckinForm
 from core.forms.slip import SlipForm
-from core.models import Address, Profile, Slip, Checkin
+from core.models import Address, Profile, Slip, Checkin, Location
 
 
 
@@ -110,3 +111,14 @@ def checkin(request):
     }
 
     return render(request, 'checkin.html', context)
+
+
+@login_required
+def save_location(request):
+    if request.method == "POST":
+        lat = request.POST.get('lat')
+        lng = request.POST.get('lng')
+        user = request.user
+        google_maps_link = f"https://www.google.com/maps?q={lat},{lng}"
+        Location.objects.create(user=user, lat=lat, lng=lng, map_link=google_maps_link)
+    return HttpResponse(status=204) 
