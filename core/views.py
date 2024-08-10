@@ -73,7 +73,7 @@ def upload_slip(request):
             slip = form.save(commit=False)
             slip.user = request.user
             slip.save()
-            return redirect('home')  # เปลี่ยนเส้นทางตามที่คุณต้องการหลังจากอัปโหลดสำเร็จ
+            return redirect('profile')  # เปลี่ยนเส้นทางตามที่คุณต้องการหลังจากอัปโหลดสำเร็จ
     else:
         form = SlipForm()
 
@@ -102,7 +102,7 @@ def checkin(request):
             checkin = form.save(commit=False)
             checkin.user = request.user
             checkin.save()
-            return redirect('home')
+            return redirect('profile')
     else:
         form = CheckinForm(instance=checkin_instance)
     

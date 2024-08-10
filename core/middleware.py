@@ -6,7 +6,9 @@ class BlockSafariMiddleware:
 
     def __call__(self, request):
         user_agent = request.META.get('HTTP_USER_AGENT', '')
-        if 'Safari' in user_agent and 'Chrome' not in user_agent:
+
+        # ตรวจสอบว่าผู้ใช้กำลังใช้ Safari (แต่ไม่ใช่ Chrome) อยู่หรือไม่
+        if 'Safari' in user_agent and 'Chrome' not in user_agent and 'CriOS' not in user_agent:
             return HttpResponseForbidden("Access denied: Safari browser is not allowed.")
 
         response = self.get_response(request)
