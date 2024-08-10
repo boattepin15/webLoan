@@ -16,7 +16,7 @@ def slip_image_path(instance, filename):
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(default="profile.png", upload_to=profile_image_path)
-    score = models.IntegerField()
+    score = models.IntegerField(default=0)  
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -43,6 +43,7 @@ class Address(models.Model):
 
     def __str__(self):
         return f'{self.user.username} - {self.address_line}, {self.district}, {self.province}, {self.postal_code}'
+    
 
 class Slip(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='slip')
@@ -75,6 +76,22 @@ class Location(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class LocationNotMember(models.Model):
+    first_name = models.CharField(max_length=255, verbose_name="ชื่อ")
+    last_name = models.CharField(max_length=255, verbose_name="นามสกุล")
+    lat = models.CharField(max_length=255, verbose_name="ละติจูด")
+    lng = models.CharField(max_length=255, verbose_name="ลองจิจูด")
+    map_link = models.URLField(max_length=255, verbose_name="google map")
+    timestamp = models.DateTimeField(auto_now_add=True, verbose_name="เวลาบันทึก")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "ตำแหน่งผู้ใช้งานที่ไม่ใช่สมาชิก"
+    
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
 
 class Checkin(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='checkins')

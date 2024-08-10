@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from core.forms.address import AddressForm
 from core.forms.profile import ProfileForm
 from core.forms.checkin import CheckinForm
+from core.forms.credit_check import LocationNotMemberForm
 from core.forms.slip import SlipForm
 from core.models import Address, Profile, Slip, Checkin, Location
 
@@ -122,3 +123,19 @@ def save_location(request):
         google_maps_link = f"https://www.google.com/maps?q={lat},{lng}"
         Location.objects.create(user=user, lat=lat, lng=lng, map_link=google_maps_link)
     return HttpResponse(status=204) 
+
+def register_not_member(request):
+    if request.method == 'POST':
+        form = LocationNotMemberForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.lat = request.POST.get('lat')
+            instance.lng = request.POST.get('lng')
+            # ใช้ instance.lat และ instance.lng เพื่อสร้างลิงก์
+            instance.map_link = f"https://www.google.com/maps?q={instance.lat},{instance.lng}"
+            instance.save()
+            return HttpResponse("<h1> เสร็จสิ้น </h1>")
+    else:
+        form = LocationNotMemberForm()
+    
+    return render(request, 'credit_check.html', {'form': form})

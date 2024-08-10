@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'core.middleware.BlockSafariMiddleware',
 ]
 
 ROOT_URLCONF = 'webLoan.urls'
@@ -128,7 +129,7 @@ TIME_ZONE = 'Asia/Bangkok'
 
 
 #SET LOGIN AUTH
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'checkin'
 LOGIN_URL = 'login'
 
 # Static files (CSS, JavaScript, Images)

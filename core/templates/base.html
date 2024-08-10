@@ -50,9 +50,13 @@
           </ul>
 
           <div class="col-md-3 text-end">
-            <a href="{% url 'login' %}" class="btn btn-outline-primary me-2">เข้าสู่ระบบ</a>
-            {% comment %} <a href="{% url 'register' %}" class="btn btn-primary">สมัครสมาชิก</a> {% endcomment %}
-          </div>
+            {% if user.is_authenticated %}
+                <a href="{% url 'login' %} "class="btn btn-warning">กำลังอยู่ในระบบ</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-outline-primary me-2">เข้าสู่ระบบ</a>
+                {% comment %} <a href="{% url 'register' %}" class="btn btn-primary">สมัครสมาชิก</a> {% endcomment %}
+            {% endif %}
+        </div>
         </header>
       </div>
     </main>

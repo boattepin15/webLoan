@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import Profile, Location, Address, Slip, Checkin
+from core.models import Profile, Location, Address, Slip, Checkin, LocationNotMember
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ['user', 'get_first_name', 'get_last_name', 'score']
@@ -68,8 +68,14 @@ class CheckinAdmin(admin.ModelAdmin):
         return obj.user.last_name
     get_last_name.short_description = 'นามสกุล'
 
+class LocationNotMemberAdmin(admin.ModelAdmin):
+    list_display = ["first_name", "last_name", "lat", "lng", "map_link", "timestamp"]
+    search_fields = ["name", "timestamp"]
+    ordering = ["-timestamp"]
+
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Location, LocationAdmin)
 admin.site.register(Address, AddressAdmin)
 admin.site.register(Slip, SlipAdmin)
 admin.site.register(Checkin, CheckinAdmin)
+admin.site.register(LocationNotMember, LocationNotMemberAdmin)
