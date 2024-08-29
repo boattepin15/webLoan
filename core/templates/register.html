@@ -20,12 +20,12 @@
         text-anchor: middle;
         -webkit-user-select: none;
         -moz-user-select: none;
-        user-select: none.
+        user-select: none;
       }
 
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
-          font-size: 3.5rem.
+          font-size: 3.5rem;
         }
       }
     </style>
@@ -41,7 +41,7 @@
       <h1 class="h3 mb-3 fw-normal">สมัครสมาชิก</h1>
       
       <!-- แสดงข้อผิดพลาดของฟอร์ม -->
-      {% if form.errors %}
+      {% if form and form.errors %}
         <div class="alert alert-danger">
           <ul class="mb-0">
             {% for field in form %}
@@ -55,27 +55,20 @@
           </ul>
         </div>
       {% endif %}
-      
-      <div class="form-floating mb-3">
-        {{ form.username.label_tag }}
+      <div class="mb-3">
         {{ form.username }}
       </div>
-      <div class="form-floating mb-3">
-        {{ form.email.label_tag }}
+      <div class="mb-3">
         {{ form.email }}
       </div>
-      <div class="form-floating mb-3">
-        {{ form.password1.label_tag }}
+      <div class="mb-3">
         {{ form.password1 }}
       </div>
-      <div class="form-floating mb-3">
-        {{ form.password2.label_tag }}
+      <div class="mb-3">
         {{ form.password2 }}
       </div>
-
       <button class="w-100 btn btn-lg btn-primary" type="submit">ยืนยันการสมัคร</button>
     </form>
   </main>
-
   </body>
 </html>
